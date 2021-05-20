@@ -47,11 +47,11 @@ Clone the repository down and ensure that minikube is started up.
 From there, its as easy as applying the namespace first, then deploying the rest of the yaml files.
 
 ```bash
-git clone zzz
+git clone https://github.com/antonsmit30/k8s-react-demo-app.git
 # start minikube
 minikube start
 # ensure minikube is running
-cd 
+cd k8s-react-demo-app/
 # deploy ns first
 kubectl apply -f deployments/k8s-demo-ns.yml
 # deploy the rest of the code:
@@ -61,7 +61,7 @@ kubectl apply -f deployments/
 ## Working setup
 
 ```bash
-$ kubectl get all
+$ kubectl get all -n k8s-demo
 NAME                                        READY   STATUS    RESTARTS   AGE
 pod/nginx-deployment-5c9f7c9b-8l8bq         1/1     Running   0          65s
 pod/react-app-deployment-7cbcbc5594-gfzp6   1/1     Running   0          65s
