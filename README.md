@@ -40,7 +40,7 @@ https://minikube.sigs.k8s.io/docs/start/
 
 Also ensure that `kubectl` tool is installed.
 
-## Linux Install
+## Linux / MacOS Install
 
 Clone the repository down and ensure that minikube is started up.
 <br>
