@@ -1,0 +1,30 @@
+# Reference: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app-deployment
+  namespace: k8s-demo
+  labels:
+    app: react
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: react
+    spec:
+      containers:
+      - name: nginx
+        image: docker.io/antonsmit30/react-loki-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+

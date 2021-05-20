@@ -1,0 +1,20 @@
+# Service file specifies how to connect to our pods.
+# Reference: https://kubernetes.io/docs/concepts/services-networking/service/
+# Our selector will specify labels that should be defined on our pods we want traffic
+# to be directed to.
+# Access will not be direct but rather through nginx
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-service
+  namespace: k8s-demo
+spec:
+  type: ClusterIP
+  selector:
+    app: react
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+...

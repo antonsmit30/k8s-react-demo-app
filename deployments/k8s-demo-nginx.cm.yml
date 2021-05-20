@@ -1,0 +1,37 @@
+# Reference: https://kubernetes.io/docs/concepts/configuration/configmap/
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+  namespace: k8s-demo
+data:
+  default.conf: |
+    upstream app {
+      server app-service.k8s-demo.svc.cluster.local:80;
+      keepalive 1024;
+    }
+    server {
+    listen       80;
+    listen  [::]:80;
+    server_name  localhost;
+
+    #charset koi8-r;
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    # Resolving using kubedns
+    resolver kube-dns.kube-system.svc.cluster.local valid=5s;
+
+    # location / {
+    #     root   /usr/share/nginx/html;
+    #     index  index.html index.htm;
+    # }
+    # Sending root traffic to backend server
+    location / {
+        proxy_pass http://app-service.k8s-demo.svc.cluster.local;
+        
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+    }
